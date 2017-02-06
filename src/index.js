@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import { loadRecipes } from './actions/ingredientActions';
+import { loadRecipes } from './actions/recipeActions';
 import configureStore from './store/configureStore';
 import routes from './routes';
 import './index.css';
