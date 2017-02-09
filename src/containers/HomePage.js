@@ -3,9 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as recipeActions from '../actions/recipeActions';
 import RecipeList from '../components/recipe/RecipeList';
+// import configureStore from '../store/configureStore';
+// import { loadRecipes } from '../actions/recipeActions';
+//
+//
+// const store = configureStore();
+// store.dispatch(loadRecipes());
 
 class RecipePage extends React.Component {
-  
+
   render() {
     const {recipes} = this.props;
     return (

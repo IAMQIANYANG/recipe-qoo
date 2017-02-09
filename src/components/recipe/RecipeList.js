@@ -5,7 +5,7 @@ const RecipeList = ({recipes}) => {
   return (
     <div>
       {recipes.map(recipe => {
-        return <RecipeThumbnail key={recipe.id} recipe={recipe}/>
+        return <RecipeThumbnail key={recipe._id} recipe={recipe}/>
       })}
     </div>
   )

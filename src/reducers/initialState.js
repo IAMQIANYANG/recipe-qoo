@@ -1,3 +1,5 @@
 export default {
-  recipes: []
+  recipes: [],
+  numberOfAsyncCallsInProgress: 0,
+  currentRecipe: {}
 }

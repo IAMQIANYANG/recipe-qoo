@@ -1,18 +1,11 @@
 import * as types from './actionTypes';
-import ingredientApi from '../api/mockRecipeApi';
+import { Actions } from 'redux';
+import { beginAsyncCall } from './asynCallActions';
+import { updateCurrentRecipe } from './currentRecipeActions';
+
 
 export function loadRecipesSuccess(recipes) {
   return {type: types.LOAD_RECIPES_SUCCESS, recipes}
-}
-
-export function loadRecipes() {
-  return function(dispatch) {
-    return ingredientApi.getAllCourses().then(recipes => {
-      dispatch(loadRecipesSuccess(recipes));
-    }).catch(error => {
-      throw(error)
-    })
-  }
 }
 
 export function updateRecipeSuccess(recipe) {
@@ -23,14 +16,70 @@ export function createRecipeSuccess(recipe) {
   return {type: types.CREATE_RECIPE_SUCCESS, recipe}
 }
 
+export function deleteRecipeSuccess(recipe) {
+  return {type: types.DELETE_RECIPE_SUCCESS, recipe}
+}
 
-export function saveRecipe(recipe, recipeId) {
+export function loadRecipes() {
   return function(dispatch) {
-    return ingredientApi.saveCourse(recipe).then(recipe => {
-      recipeId? dispatch(updateRecipeSuccess(recipe)) :
-        dispatch(createRecipeSuccess(recipe));
-    }).catch(error => {
-      throw(error)
-    })
+    dispatch(beginAsyncCall());
+    return fetch("http://localhost:3001/recipes")
+      .then(recipes => recipes.json())
+      .then(recipes => dispatch(loadRecipesSuccess(recipes)))
+      .catch(error => console.log(error));
   }
 }
+
+export function createRecipe(recipe) {
+  return function(dispatch) {
+    dispatch(beginAsyncCall());
+    return fetch("http://localhost:3001/recipes",
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(recipe)
+      }).then(result => result.json())
+        .then(result => dispatch(createRecipeSuccess(result)))
+        .then(result => dispatch(updateCurrentRecipe(result.recipe)))
+        .catch(error => console.log(error));
+  }
+}
+
+export function updateRecipe(recipe) {
+  return function(dispatch) {
+    return fetch("http://localhost:3001/recipes",
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "PUT",
+        body: JSON.stringify(recipe)
+      }).then(dispatch(updateRecipeSuccess(recipe)))
+      .catch(error => console.log(error));
+  }
+}
+
+
+export function deleteRecipe(recipe) {
+  return function(dispatch) {
+    return fetch("http://localhost:3001/recipes",
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "DELETE",
+        body: JSON.stringify(recipe)
+      }).then(dispatch(deleteRecipeSuccess(recipe)))
+      .catch(error => console.log(error));
+  }
+}
+
+
+
+
+

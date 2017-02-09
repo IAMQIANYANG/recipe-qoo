@@ -14,18 +14,21 @@ class ManageRecipePage extends React.Component {
 
     this.onRecipeFormSave = this.onRecipeFormSave.bind(this);
     this.onRecipeFormChange = this.onRecipeFormChange.bind(this);
+    this.redirect = this.redirect.bind(this);
 
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.recipe.id !== nextProps.recipe.id) {
+    if (this.props.recipe._id !== nextProps.recipe._id) {
       this.setState({recipe: Object.assign({}, nextProps.recipe)});
     }
+
   }
 
-  redirect() {
-    this.context.router.push('/');
+  redirect(id) {
+    this.context.router.push(`/recipes/${id}`);
   }
+
 
   onRecipeFormSave(event){
     event.preventDefault();
@@ -33,9 +36,17 @@ class ManageRecipePage extends React.Component {
     ingredients = ingredients.split("\n");
     let directions = this.state.recipe.directions;
     directions = directions.split("\n");
-    const formattedRecipe = Object.assign({}, this.state.recipe, {ingredients}, {directions});
-    this.props.actions.saveRecipe(formattedRecipe, this.props.params.id);
-    this.redirect();
+    let tags = this.state.recipe.tags[0];
+    tags = tags.split(",");
+    const formattedRecipe = Object.assign({}, this.state.recipe, {ingredients}, {directions}, {tags});
+    
+    if (this.props.recipe._id) {
+      this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
+    } else {
+      // this.props.actions.createRecipe(formattedRecipe).then((result) => { recipeID = result.recipe._id}).then(() => this.redirect(recipeID));
+      this.props.actions.createRecipe(formattedRecipe).then(() => this.redirect(this.props.currentRecipe._id));
+
+    }
 
   }
 
@@ -62,15 +73,16 @@ ManageRecipePage.contextTypes = {
 };
 
 const getCurrentRecipeById = (recipes, id) => {
-  const currentRecipe = recipes.filter(recipe => +recipe.id === +id);
+  const currentRecipe = recipes.filter(recipe => recipe._id == id);
   if (currentRecipe) return currentRecipe[0];
   return null;
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state.currentRecipe)
   const currentRecipeId = ownProps.params.id;
 
-  let recipe = {name: "",  id: "",  image: "",  ingredients: [],  directions: [], tags: [] };
+  let recipe = {name: "", image: "",  ingredients: [],  directions: [], tags: [] };
 
   if (currentRecipeId && state.recipes.length > 0) {
     recipe = getCurrentRecipeById(state.recipes, currentRecipeId);
@@ -79,9 +91,9 @@ const mapStateToProps = (state, ownProps) => {
     recipe = Object.assign({}, recipe, {ingredients: formattedIngredients}, {directions: formattedDirections})
 
   }
-
   return {
-    recipe: recipe
+    recipe: recipe,
+    currentRecipe: state.currentRecipe
   }
 };
 
