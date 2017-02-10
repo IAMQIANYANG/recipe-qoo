@@ -9,7 +9,7 @@ class ManageRecipePage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      recipe: Object.assign({}, this.props.recipe)
+      localRecipe: Object.assign({}, this.props.recipe)
     };
 
     this.onRecipeFormSave = this.onRecipeFormSave.bind(this);
@@ -32,14 +32,14 @@ class ManageRecipePage extends React.Component {
 
   onRecipeFormSave(event){
     event.preventDefault();
-    let ingredients = this.state.recipe.ingredients;
+    let ingredients = this.state.localRecipe.ingredients;
     ingredients = ingredients.split("\n");
-    let directions = this.state.recipe.directions;
+    let directions = this.state.localRecipe.directions;
     directions = directions.split("\n");
-    let tags = this.state.recipe.tags[0];
+    let tags = this.state.localRecipe.tags[0];
     tags = tags.split(",");
-    const formattedRecipe = Object.assign({}, this.state.recipe, {ingredients}, {directions}, {tags});
-    
+    const formattedRecipe = Object.assign({}, this.state.localRecipe, {ingredients}, {directions}, {tags});
+
     if (this.props.recipe._id) {
       this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
     } else {
@@ -52,17 +52,17 @@ class ManageRecipePage extends React.Component {
 
 
   onRecipeFormChange(event) {
-    let recipe = this.state.recipe;
+    let recipe = this.state.localRecipe;
     const field = event.target.name;
     recipe[field] = event.target.value;
     return this.setState({recipe})
   }
-  
+
   render() {
-    const {recipe} = this.state;
+    const {localRecipe} = this.state;
     return (
       <div>
-        <RecipeForm recipe={recipe} onChange={this.onRecipeFormChange} onSave={this.onRecipeFormSave}/>
+        <RecipeForm recipe={localRecipe} onChange={this.onRecipeFormChange} onSave={this.onRecipeFormSave}/>
       </div>
     )
   }
@@ -104,4 +104,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageRecipePage)
-
