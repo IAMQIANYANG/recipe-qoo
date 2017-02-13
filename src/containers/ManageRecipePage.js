@@ -43,7 +43,6 @@ class ManageRecipePage extends React.Component {
     if (this.props.recipe._id) {
       this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
     } else {
-      // this.props.actions.createRecipe(formattedRecipe).then((result) => { recipeID = result.recipe._id}).then(() => this.redirect(recipeID));
       this.props.actions.createRecipe(formattedRecipe).then(() => this.redirect(this.props.currentRecipe._id));
 
     }
@@ -79,7 +78,6 @@ const getCurrentRecipeById = (recipes, id) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.currentRecipe)
   const currentRecipeId = ownProps.params.id;
 
   let recipe = {name: "", image: "",  ingredients: [],  directions: [], tags: [] };

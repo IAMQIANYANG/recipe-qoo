@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { register } from '../actions/authActions';
+import * as authActions from '../actions/authActions';
 
 
 
-class RegisterPage extends Component {
+class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class RegisterPage extends Component {
 
   onFormSave(event){
     event.preventDefault();
-    this.props.register(this.state.userInfo)
+    this.props.login(this.state.userInfo)
   }
 
   render() {
@@ -45,15 +45,15 @@ class RegisterPage extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    
+
   }
 };
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    register: userInfo => dispatch(register(userInfo))
+    login: userInfo => dispatch(authActions.login(userInfo))
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

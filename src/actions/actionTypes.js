@@ -14,3 +14,12 @@ export const BEGIN_ASYNCCALL = 'BEGIN_ASYNCCALL';
 export const UPDATE_CURRENTRECIPE = 'UPDATE_CURRENTRECIPE';
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+
+export const AUTH_USER = 'AUTH_USER';
+export const UNAUTH_USER = 'UNAUTH_USER';
+export const AUTH_ERR = 'AUTH_ERR';
+
+
+export const API_URL = "http://localhost:3001";
+export const CLIENT_URL = "http://localhost:3000";
+
