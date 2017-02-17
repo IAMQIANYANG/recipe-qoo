@@ -19,8 +19,8 @@ class RecipeDetail extends Component {
   }
 
   deleteAndRedirect(recipe) {
-    this.props.actions.deleteRecipe(recipe).
-    then(this.context.router.push('/'));
+    this.props.actions.deleteRecipe(recipe)
+      .then(this.context.router.push('/'));
   }
 
   render() {
@@ -32,28 +32,40 @@ class RecipeDetail extends Component {
 
     if (currentRecipe) {
     return (
-      <div>
-        <h2>{currentRecipe.name}</h2>
-        <img src={currentRecipe.image} />
-        <Link to={`recipes/${currentRecipeId}/edit`}><button>edit</button></Link>
-        <button onClick={() => this.deleteAndRedirect(currentRecipe)}>delete</button>
-        <h3>Ingredients</h3>
-        <table>
-          <tbody>
+      <div className="container">
+        <h1>{currentRecipe.name}</h1>
+        <div className="row">
+          <img className="col-md-6" src={currentRecipe.image} alt="recipe"/>
+          <div className="author-info  col-md-6">
+            <h4>Created by {currentRecipe.author.username}</h4>
+            {currentRecipe.author.id === this.props.currentUserId && <Link to={`recipes/${currentRecipeId}/edit`}><button className="btn">edit</button></Link>}
+            {currentRecipe.author.id === this.props.currentUserId && <button className="btn" onClick={() => this.deleteAndRedirect(currentRecipe)}>delete</button>}
+          </div>
+        </div>
+        <div className="row">
+        </div>
+        <div className="row">
+          <h3 className="section-ingredients-title">Ingredients</h3>
+        </div>
+        <div className="row" >
           {currentRecipe.ingredients.map( (ingredient, index) =>
             <IngredientRow key={index} ingredient={ingredient}/> )}
-          </tbody>
-        </table>
-        <h3>Directions</h3>
-        <table>
-          <tbody>
+        </div>
+
+        <div className="row">
+          <h3 className="section-directions-title">Directions</h3>
+        </div>
+          <div className="row">
           {currentRecipe.directions.map((direction, index) =>
             <DirectionRow key={index} direction={direction}/> )}
-          </tbody>
-        </table>
-        <h3>Tags</h3>
-        {currentRecipe.tags.map((tag, index) =>
-          <p key={index}>{tag}</p>)}
+          </div>
+
+        <div className="row">
+          <h3 className="section-tags-title">Tags</h3>
+        </div>
+          <div className="row">
+        <div className="tag">{currentRecipe.tags.reduce((previous, current) => `${previous}  ${current}`)}</div>
+          </div>
 
       </div>
     )}
@@ -67,7 +79,8 @@ RecipeDetail.contextTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    currentUserId: state.auth.userid
   }
 };
 

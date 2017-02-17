@@ -1,13 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
-const RecipeThumbnail = ({recipe}) => {
+const RecipeThumbnail = ({recipe, className}) => {
   return (
-    <div>
+    <div className={className}>
+      <div className="thumbnail">
       <Link to={`recipes/${recipe._id}`}>
-        <img src={recipe.image} />
-        <h3>{recipe.name}</h3>
-      </Link>
+        <img className="img-responsive" src={recipe.image} alt="recipe" />
+        <div className="caption">
+          <h3>{recipe.name}</h3>
+        </div>
+        </Link>
+      </div>
     </div>
   )
 };

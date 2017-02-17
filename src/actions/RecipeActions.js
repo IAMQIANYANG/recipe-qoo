@@ -1,8 +1,10 @@
 import * as types from './actionTypes';
-import { Actions } from 'redux';
 import { beginAsyncCall } from './asynCallActions';
 import { updateCurrentRecipe } from './currentRecipeActions';
+import cookie from 'react-cookie';
 
+
+const requestToken = cookie.load('token');
 
 export function loadRecipesSuccess(recipes) {
   return {type: types.LOAD_RECIPES_SUCCESS, recipes}
@@ -37,7 +39,9 @@ export function createRecipe(recipe) {
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${requestToken}`
+
         },
         method: "POST",
         body: JSON.stringify(recipe)
@@ -54,7 +58,9 @@ export function updateRecipe(recipe) {
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${requestToken}`
+
         },
         method: "PUT",
         body: JSON.stringify(recipe)
@@ -70,7 +76,9 @@ export function deleteRecipe(recipe) {
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${requestToken}`
+
         },
         method: "DELETE",
         body: JSON.stringify(recipe)

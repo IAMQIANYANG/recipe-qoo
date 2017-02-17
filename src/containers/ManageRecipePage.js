@@ -36,9 +36,14 @@ class ManageRecipePage extends React.Component {
     ingredients = ingredients.split("\n");
     let directions = this.state.localRecipe.directions;
     directions = directions.split("\n");
-    let tags = this.state.localRecipe.tags[0];
+    let tags = this.state.localRecipe.tags;
+    console.log(tags)
     tags = tags.split(",");
-    const formattedRecipe = Object.assign({}, this.state.localRecipe, {ingredients}, {directions}, {tags});
+    const username = this.props.username;
+    const userid = this.props.userid;
+    
+    const formattedRecipe = Object.assign({}, this.state.localRecipe, {ingredients}, {directions}, {tags}, {username}, {userid});
+    
 
     if (this.props.recipe._id) {
       this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
@@ -91,7 +96,9 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     recipe: recipe,
-    currentRecipe: state.currentRecipe
+    currentRecipe: state.currentRecipe,
+    username: state.auth.username,
+    userid: state.auth.userid
   }
 };
 

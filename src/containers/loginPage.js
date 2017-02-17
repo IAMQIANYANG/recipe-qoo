@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/authActions';
+import { Link } from 'react-router';
 
 
 
@@ -32,12 +33,24 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <form>
-        <input type="text" name="username" placeholder="username" onChange={this.onFormChange} value={this.state.username}/>
-        <input type="text" name="password" placeholder="password" onChange={this.onFormChange} value={this.state.password}/>
-        <input type="submit" onClick={this.onFormSave} />
-
-      </form>
+      <div className="container">
+        <div className="col-md-4 col-md-offset-4">
+        <div className="panel-body">
+          <form>
+            <div class="form-group">
+              <input type="text" className="form-control" name="username" placeholder="username" onChange={this.onFormChange} value={this.state.username}/>
+            </div>
+            <div class="form-group">
+              <input type="text" className="form-control" name="password" placeholder="password" onChange={this.onFormChange} value={this.state.password}/>
+            </div>
+            <div class="form-group">
+              <input className="form-control login-button" type="submit" onClick={this.onFormSave} value="Log In"/>
+            </div>
+          </form>
+          <div className="signup"><Link to="/signup">New? Sign up!</Link></div>
+        </div>
+        </div>
+      </div>
     )
   }
 

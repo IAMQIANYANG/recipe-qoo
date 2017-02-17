@@ -1,9 +1,9 @@
 import * as types from './actionTypes';
-import { Actions } from 'redux';
 import cookie from 'react-cookie';
 import { beginAsyncCall } from './asynCallActions';
 
 
+const requestToken = cookie.load('token');
 
 
 export function register(userInfo) {
@@ -18,7 +18,14 @@ export function register(userInfo) {
         method: "POST",
         body: JSON.stringify(userInfo)
       }).then(result => result.json())
-      .then(result => console.log(result));
+      .then(result => {
+        if (result.error){
+          console.log(result.message)
+        } else {
+          cookie.save('token', result.token, { path: '/' });
+          dispatch({ type: types.AUTH_USER });
+          window.location.href = types.CLIENT_URL + '/';
+        }});
   }
 }
 
@@ -29,28 +36,27 @@ export function login(userInfo) {
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: "POST",
         body: JSON.stringify(userInfo)
       }).then(response => response.json())
-        .then(result => {cookie.save('token', result.token, { path: '/' });
-                        dispatch({ type: types.AUTH_USER });
-                        console.log(result)
-          // window.location.href = types.CLIENT_URL + '/';
-      })
-      .catch((error) => {
-        errorHandler(dispatch, error.response, types.AUTH_ERR)
-      });
+        .then(result => {
+          if (result.error){
+          console.log(result.error.message)
+        } else {
+          cookie.save('token', result.token, { path: '/' });
+          dispatch({ type: types.AUTH_USER});
+          window.location.href = types.CLIENT_URL + '/';
+      }});
   }
 }
 
-export function logoutUser() {
+export function logout() {
   return function (dispatch) {
     dispatch({ type: types.UNAUTH_USER });
     cookie.remove('token', { path: '/' });
-
-    window.location.href = types.CLIENT_URL + '/logout';
+    window.location.href = types.CLIENT_URL;
   }
 }
 
@@ -66,11 +72,23 @@ export function errorHandler(dispatch, error, type) {
       type: type,
       payload: 'You are not authorized to do this. Please login and try again.'
     });
-    logoutUser();
+    logout();
   } else {
     dispatch({
       type: type,
       payload: errorMessage
     });
+  }
+}
+
+export function getCurrentUser(token) {
+  return function(dispatch) {
+    dispatch(beginAsyncCall());
+    return fetch(`${types.API_URL}/users/me?token=${requestToken}`)
+      .then(response => response.json())
+        .then(result => {
+          dispatch({type: types.GET_USER, payload: result })
+        })
+
   }
 }

@@ -2,13 +2,16 @@ import React, {PropTypes} from 'react';
 import RecipeThumbnail from '../../components/recipe/RecipeThumbnail';
 
 const RecipeList = ({recipes}) => {
-  return (
-    <div>
-      {recipes.map(recipe => {
-        return <RecipeThumbnail key={recipe._id} recipe={recipe}/>
-      })}
-    </div>
-  )
+  if(recipes) {
+    return (
+      <div className="row">
+        {recipes.map(recipe => {
+          return <RecipeThumbnail className="col-md-3" key={recipe._id} recipe={recipe}/>
+        })}
+      </div>
+
+    )
+  }
 };
 
 RecipeList.propTypes = {

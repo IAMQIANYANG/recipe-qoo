@@ -8,6 +8,7 @@ export default function recipeReducer(state = initialState.recipes, action) {
       return action.recipes;
     
     case types.CREATE_RECIPE_SUCCESS:
+      
       return [...state, Object.assign({}, action.recipe)];
 
     case types.DELETE_RECIPE_SUCCESS:

@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
 const actionEndsInSuccess = (actionType) => {
-  return actionType.substring(actionType.length - 8) == '_SUCCESS';
+  return actionType.substring(actionType.length - 8) === '_SUCCESS';
 };
 
 export default function asyncCallReducer(state = initialState.numberOfAsyncCallsInProgress, action) {

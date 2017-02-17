@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
 
 const DirectionRow = ({direction}) => {
   return (
-    <tr>
-      <td>{direction}</td>
-    </tr>
+    
+      <div className="direction">{direction}</div>
+    
   )
 };
 

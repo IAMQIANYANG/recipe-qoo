@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
 
 const IngredientRow = ({ingredient}) => {
   return (
-    <tr>
-      <td>{ingredient}</td>
-    </tr>
+    
+      <div className="ingredient col-md-5">{ingredient}</div>
+   
   )
 };
 
