@@ -1,6 +1,11 @@
 import * as types from './actionTypes';
 import cookie from 'react-cookie';
 import { beginAsyncCall } from './asynCallActions';
+import toastr from 'toastr'
+
+toastr.options = {
+  "positionClass": "toast-top-full-width"
+};
 
 
 const requestToken = cookie.load('token');
@@ -20,7 +25,7 @@ export function register(userInfo) {
       }).then(result => result.json())
       .then(result => {
         if (result.error){
-          console.log(result.message)
+          toastr.error(result.message)
         } else {
           cookie.save('token', result.token, { path: '/' });
           dispatch({ type: types.AUTH_USER });
@@ -43,7 +48,7 @@ export function login(userInfo) {
       }).then(response => response.json())
         .then(result => {
           if (result.error){
-          console.log(result.error.message)
+            toastr.error(result.message)
         } else {
           cookie.save('token', result.token, { path: '/' });
           dispatch({ type: types.AUTH_USER});
@@ -60,26 +65,6 @@ export function logout() {
   }
 }
 
-export function errorHandler(dispatch, error, type) {
-  let errorMessage = '';
-
-  if(error.error) {
-    errorMessage = error.message;
-  }
-
-  if(error.status === 401) {
-    dispatch({
-      type: type,
-      payload: 'You are not authorized to do this. Please login and try again.'
-    });
-    logout();
-  } else {
-    dispatch({
-      type: type,
-      payload: errorMessage
-    });
-  }
-}
 
 export function getCurrentUser(token) {
   return function(dispatch) {

@@ -4,7 +4,7 @@ import TextInput from '../common/TextsInput'
 
 const RecipeForm = ({recipe, onChange, onSave}) => {
   return (
-    <div className="container">
+    <div className="container recipe-form">
     <form>
       <div className="form-group">
         <label htmlFor="recipeName">Recipe Name</label>

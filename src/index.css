@@ -21,6 +21,7 @@ a.hover {
 .navbar {
   background: #C5EFF7;
   padding: 0 15px;
+  border: 0;
 }
 
 .navbar a {
@@ -41,6 +42,9 @@ a.hover {
 
 /* recipe detail*/
 
+.recipe-form {
+  margin-top: 70px;
+}
 
 .author-info {
   vertical-align: bottom;
@@ -140,9 +144,30 @@ a.hover {
   box-shadow:none;
 }
 
+.panel-body {
+  margin-top: 100px;
+}
+
 .signup {
   text-align: center;
   font-size: 1.3em;
   color: #42729B;
 
+}
+
+.toast-top-full-width {
+  margin-top: 60px;
+}
+
+.footer {
+  text-align: center;
+}
+
+.about {
+  height: 80vh;
+}
+
+.about-intro {
+  font-size: 1.3em;
+  margin: 10px;
 }

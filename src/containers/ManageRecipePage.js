@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as recipeActions from '../actions/recipeActions';
 import RecipeForm from '../components/recipe/RecipeForm';
+import toastr from 'toastr'
 
+toastr.options = {
+  "positionClass": "toast-top-full-width"
+};
 
 class ManageRecipePage extends React.Component {
   constructor(props, context) {
@@ -32,24 +36,27 @@ class ManageRecipePage extends React.Component {
 
   onRecipeFormSave(event){
     event.preventDefault();
-    let ingredients = this.state.localRecipe.ingredients;
-    ingredients = ingredients.split("\n");
-    let directions = this.state.localRecipe.directions;
-    directions = directions.split("\n");
-    let tags = this.state.localRecipe.tags;
-    console.log(tags)
-    tags = tags.split(",");
-    const username = this.props.username;
-    const userid = this.props.userid;
-    
-    const formattedRecipe = Object.assign({}, this.state.localRecipe, {ingredients}, {directions}, {tags}, {username}, {userid});
-    
-
-    if (this.props.recipe._id) {
-      this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
+    if (!this.state.localRecipe.name || this.state.localRecipe.ingredients.length < 1 || !this.state.localRecipe.image || this.state.localRecipe.directions.length < 1) {
+      toastr.error("All information is required except tags")
     } else {
-      this.props.actions.createRecipe(formattedRecipe).then(() => this.redirect(this.props.currentRecipe._id));
+      let ingredients = this.state.localRecipe.ingredients;
+      ingredients = ingredients.split("\n");
+      let directions = this.state.localRecipe.directions;
+      directions = directions.split("\n");
+      let tags = this.state.localRecipe.tags;
+      tags = tags.split(",");
+      const username = this.props.username;
+      const userid = this.props.userid;
 
+      const formattedRecipe = Object.assign({}, this.state.localRecipe, {ingredients}, {directions}, {tags}, {username}, {userid});
+
+
+      if (this.props.recipe._id) {
+        this.props.actions.updateRecipe(formattedRecipe).then(this.redirect(this.props.recipe._id));
+      } else {
+        this.props.actions.createRecipe(formattedRecipe).then(() => this.redirect(this.props.currentRecipe._id));
+
+      }
     }
 
   }

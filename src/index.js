@@ -9,6 +9,7 @@ import { getCurrentUser } from './actions/authActions'
 import configureStore from './store/configureStore';
 import routes from './routes';
 import './index.css';
+import '../node_modules/toastr/build/toastr.min.css';
 
 
 const store = configureStore();

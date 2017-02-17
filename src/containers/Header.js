@@ -12,7 +12,7 @@ class Header extends Component {
       <nav className="navbar">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">Recipe Q</Link>
+            <Link to="/" className="navbar-brand">Recipe Qoo</Link>
           </div>
           <ul className="nav navbar-nav">
             <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
