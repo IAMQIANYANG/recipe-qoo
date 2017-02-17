@@ -39,6 +39,7 @@ class ManageRecipePage extends React.Component {
     if (!this.state.localRecipe.name || this.state.localRecipe.ingredients.length < 1 || !this.state.localRecipe.image || this.state.localRecipe.directions.length < 1) {
       toastr.error("All information is required except tags")
     } else {
+      console.log(this.state.localRecipe.tags)
       let ingredients = this.state.localRecipe.ingredients;
       ingredients = ingredients.split("\n");
       let directions = this.state.localRecipe.directions;
@@ -98,7 +99,9 @@ const mapStateToProps = (state, ownProps) => {
     recipe = getCurrentRecipeById(state.recipes, currentRecipeId);
     const formattedIngredients = recipe.ingredients.reduce((a, b) => a + '\n' + b);
     const formattedDirections = recipe.directions.reduce((a, b) => a + '\n' + b);
-    recipe = Object.assign({}, recipe, {ingredients: formattedIngredients}, {directions: formattedDirections})
+    const formattedTags = recipe.tags.reduce((a, b) => a + ',' + b);
+
+    recipe = Object.assign({}, recipe, {ingredients: formattedIngredients}, {directions: formattedDirections}, {tags: formattedTags})
 
   }
   return {

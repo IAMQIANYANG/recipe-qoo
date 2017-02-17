@@ -29,7 +29,7 @@ class HomePage extends React.Component {
           <div className="col-md-2"></div>
           <div className="row">
             <h4 className="intro"> Don't feel like thinking about what to cook for today? </h4>
-            <h4 className="intro"> Just click the button below and we will choose a recipe for you!</h4>
+            <h4 className="intro"> Just click the button below and Qoo will choose a recipe for you!</h4>
           </div>
           <div className="row">
             <div className="col-md-5"></div>

@@ -16,12 +16,12 @@ import requireAuth from './containers/require-auth';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={RecipePage} />
-    <Route path="signup" component={RegisterPage} />
-    <Route path="recipes" component={RecipesPage} />
-    <Route path="login" component={LoginPage} />
-    <Route path="recipes/new" component={requireAuth(AddRecipePage)} />
-    <Route path="recipes/:id" component={RecipeDetail} />
-    <Route path="recipes/:id/edit" component={ManageRecipePage} />
+    <Route path="/signup" component={RegisterPage} />
+    <Route path="/recipes" component={RecipesPage} />
+    <Route path="/login" component={LoginPage} />
+    <Route path="/recipes/new" component={requireAuth(AddRecipePage)} />
+    <Route path="/recipes/:id" component={RecipeDetail} />
+    <Route path="/recipes/:id/edit" component={ManageRecipePage} />
     <Route path="/about" component={AboutPage} />
   </Route>
 );

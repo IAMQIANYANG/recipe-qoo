@@ -22,7 +22,7 @@ class Header extends Component {
           </ul>
           <ul className="nav navbar-nav navbar-right">
             {this.props.isAuthenticated ? <li><Link to="logout" onClick={this.props.logout}><span className="glyphicon glyphicon-log-in"></span> Log out</Link></li> :
-              <li><Link to="login"><span className="glyphicon glyphicon-user"></span> Log In/Sign Up</Link></li>  }
+              <li><Link to="/login"><span className="glyphicon glyphicon-user"></span> Log In/Sign Up</Link></li>  }
           </ul>
         </div>
       </nav>
