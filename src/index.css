@@ -46,10 +46,6 @@ a.hover {
   margin-top: 70px;
 }
 
-.author-info {
-  vertical-align: bottom;
-}
-
 .section-ingredients-title {
   background: #F4EDF6;
   padding: 10px;
@@ -85,7 +81,7 @@ a.hover {
 .btn {
   background: none;
   border-radius: 0;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .btn:hover {

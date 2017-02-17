@@ -37,9 +37,9 @@ class RecipeDetail extends Component {
         <div className="row">
           <img className="col-md-6" src={currentRecipe.image} alt="recipe"/>
           <div className="author-info  col-md-6">
-            <h4>Created by {currentRecipe.author.username}</h4>
             {currentRecipe.author.id === this.props.currentUserId && <Link to={`recipes/${currentRecipeId}/edit`}><button className="btn">edit</button></Link>}
             {currentRecipe.author.id === this.props.currentUserId && <button className="btn" onClick={() => this.deleteAndRedirect(currentRecipe)}>delete</button>}
+            <h4>Created by {currentRecipe.author.username}</h4>
           </div>
         </div>
         <div className="row">
