@@ -21,4 +21,5 @@ export const AUTH_ERR = 'AUTH_ERR';
 export const GET_USER = 'GET_USER';
 
 export const API_URL = process.env.REACT_APP_APIURL || "http://localhost:3001";
+export const CLIENT_URL = process.env.REACT_APP_CLIENTURL || "http://localhost:3000";
 

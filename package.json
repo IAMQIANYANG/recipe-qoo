@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "REACT_APP_APIURL='https://recipe-qoo-api.herokuapp.com' react-scripts build",
+    "build": "REACT_APP_APIURL='https://recipe-qoo-api.herokuapp.com' REACT_APP_CLIENTURL='https://iamqianyang.github.io/recipe-qoo' react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build&&gh-pages -d build"
