@@ -25,7 +25,8 @@ export function deleteRecipeSuccess(recipe) {
 export function loadRecipes() {
   return function(dispatch) {
     dispatch(beginAsyncCall());
-    return fetch("http://localhost:3001/recipes")
+    console.log(types)
+    return fetch(`${types.API_URL}/recipes`)
       .then(recipes => recipes.json())
       .then(recipes => dispatch(loadRecipesSuccess(recipes)))
       .catch(error => console.log(error));
@@ -35,7 +36,7 @@ export function loadRecipes() {
 export function createRecipe(recipe) {
   return function(dispatch) {
     dispatch(beginAsyncCall());
-    return fetch("http://localhost:3001/recipes",
+    return fetch(`${types.API_URL}/recipes`,
       {
         headers: {
           'Accept': 'application/json',
@@ -54,7 +55,7 @@ export function createRecipe(recipe) {
 
 export function updateRecipe(recipe) {
   return function(dispatch) {
-    return fetch("http://localhost:3001/recipes",
+    return fetch(`${types.API_URL}/recipes`,
       {
         headers: {
           'Accept': 'application/json',
@@ -72,7 +73,7 @@ export function updateRecipe(recipe) {
 
 export function deleteRecipe(recipe) {
   return function(dispatch) {
-    return fetch("http://localhost:3001/recipes",
+    return fetch(`${types.API_URL}/recipes`,
       {
         headers: {
           'Accept': 'application/json',
