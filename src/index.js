@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory, hashHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import cookie from 'react-cookie';
 import * as types from './actions/actionTypes';
@@ -22,9 +22,10 @@ if (token) {
   store.dispatch(getCurrentUser(token));
 }
 
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory} routes={routes} />
+    <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('root')
 );
