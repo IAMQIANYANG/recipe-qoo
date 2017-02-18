@@ -25,7 +25,6 @@ export function deleteRecipeSuccess(recipe) {
 export function loadRecipes() {
   return function(dispatch) {
     dispatch(beginAsyncCall());
-    console.log(types)
     return fetch(`${types.API_URL}/recipes`)
       .then(recipes => recipes.json())
       .then(recipes => dispatch(loadRecipesSuccess(recipes)))
