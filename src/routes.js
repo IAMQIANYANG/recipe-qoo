@@ -11,8 +11,6 @@ import RecipesPage from './containers/RecipesPage'
 import AboutPage from './components/AboutPage'
 import requireAuth from './containers/require-auth';
 
-
-
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={RecipePage} />

@@ -1,5 +1,5 @@
 {
-  "name": "what-to-eat",
+  "name": "recipe-qoo",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -26,5 +26,5 @@
     "deploy": "npm run build&&gh-pages -d build"
 
   },
-  "homepage": "http://iamqianyang.github.io/recipe-qoo"
+  "homepage": "https://iamqianyang.github.io/recipe-qoo/"
 }
