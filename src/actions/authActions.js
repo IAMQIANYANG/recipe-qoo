@@ -69,7 +69,11 @@ export function logout() {
 export function getCurrentUser(token) {
   return function(dispatch) {
     dispatch(beginAsyncCall());
-    return fetch(`${types.API_URL}/users/me?token=${requestToken}`)
+    return fetch(`${types.API_URL}/users/me`, {
+      headers: {
+        'Authorization': requestToken,
+      }
+    })
       .then(response => response.json())
         .then(result => {
           dispatch({type: types.GET_USER, payload: result })
