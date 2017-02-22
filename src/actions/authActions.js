@@ -71,7 +71,7 @@ export function getCurrentUser(token) {
     dispatch(beginAsyncCall());
     return fetch(`${types.API_URL}/users/me`, {
       headers: {
-        'Authorization': requestToken,
+        'Authorization': requestToken
       }
     })
       .then(response => response.json())
