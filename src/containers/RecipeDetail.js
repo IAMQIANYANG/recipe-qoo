@@ -5,6 +5,8 @@ import DirectionRow from "../components/recipe/DirectionRow";
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import * as recipeActions from '../actions/recipeActions';
+import Loader from 'react-loader';
+
 
 class RecipeDetail extends Component {
   constructor(props, context) {
@@ -69,7 +71,9 @@ class RecipeDetail extends Component {
 
       </div>
     )}
-    else return <div>Loading</div>
+    else return (
+      <Loader loaded={false} />
+      )
   }
 }
 

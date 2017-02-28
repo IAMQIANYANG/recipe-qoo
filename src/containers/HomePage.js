@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as recipeActions from '../actions/recipeActions';
 import RecipeList from '../components/recipe/RecipeList';
 import RecipeThumbnail from '../components/recipe/RecipeThumbnail';
-
+import Loader from 'react-loader';
 
 
 class HomePage extends React.Component {
@@ -16,26 +16,18 @@ class HomePage extends React.Component {
     this.chooseARecipe = this.chooseARecipe.bind(this)
   }
 
-  chooseARecipe(){
+  chooseARecipe() {
     const recipes = this.props.recipes;
     const result = recipes[Math.floor(recipes.length * Math.random())];
     this.setState({chosenRecipe: result});
   }
-  render() {
-    const {recipes} = this.props;
+
+  renderRecipe(recipes) {
     if (recipes.length > 0) {
-      return (
-        <div className="container">
+      return (<div>
           <div className="row">
-            <div className="col-md-2"></div>
-            <div className="row">
-              <h4 className="intro"> Don't feel like thinking about what to cook for today? </h4>
-              <h4 className="intro"> Just click the button below and Qoo will choose a recipe for you!</h4>
-            </div>
-            <div className="row">
-              <div className="col-md-5"></div>
-              <button className="col-md-2 pick-button" onClick={this.chooseARecipe}>Pick A Recipe</button>
-            </div>
+            <div className="col-md-5"></div>
+            <button className="col-md-2 pick-button" onClick={this.chooseARecipe}>Pick A Recipe</button>
           </div>
           <div className="row">
             <div className="col-md-1"></div>
@@ -46,8 +38,30 @@ class HomePage extends React.Component {
             </div>
           </div>
         </div>
-      )
-    } else return <div>Loading</div>
+      );
+    } else {
+      return (
+        <Loader loaded={false}/>
+      );
+    }
+  }
+
+  render() {
+    const {recipes} = this.props;
+    
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-2"></div>
+            <div className="row">
+              <h4 className="intro"> Don't feel like thinking about what to cook for today? </h4>
+              <h4 className="intro"> Just click the button below and Qoo will choose a recipe for you!</h4>
+            </div>
+          </div>
+          {this.renderRecipe(recipes)}
+        </div>
+      );
+    
   }
 }
 

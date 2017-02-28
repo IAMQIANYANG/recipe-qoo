@@ -75,9 +75,9 @@ export function getCurrentUser(token) {
       }
     })
       .then(response => response.json())
-        .then(result => {
-          dispatch({type: types.GET_USER, payload: result })
-        })
-
+      .then(result => {
+        dispatch({type: types.GET_USER, payload: result })
+      })
+      .catch(err => dispatch({ type: types.UNAUTH_USER }))
   }
 }
