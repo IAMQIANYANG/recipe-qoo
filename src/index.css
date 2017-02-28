@@ -115,6 +115,14 @@ a.hover {
   font-size: 1.2em;
 }
 
+.pick-button:hover{
+  background: #FE8A71;
+}
+
+.pick-button:active{
+  background: #F8D9D5;
+}
+
 .pick-button:focus {
   outline:0;
 }
