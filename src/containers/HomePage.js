@@ -2,9 +2,9 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as recipeActions from '../actions/recipeActions';
-import RecipeList from '../components/recipe/RecipeList';
 import RecipeThumbnail from '../components/recipe/RecipeThumbnail';
 import Loader from 'react-loader';
+import SearchPage from './SearchPage';
 
 
 class HomePage extends React.Component {
@@ -26,16 +26,7 @@ class HomePage extends React.Component {
     if (recipes.length > 0) {
       return (<div>
           <div className="row">
-            <div className="col-md-5"></div>
-            <button className="col-md-2 pick-button" onClick={this.chooseARecipe}>Pick A Recipe</button>
-          </div>
-          <div className="row">
-            <div className="col-md-1"></div>
-            <div className="col-md-10">
-              { this.state.chosenRecipe ?
-                <RecipeThumbnail className="col-md-12 picked-recipe" recipe={this.state.chosenRecipe}/> :
-                <RecipeThumbnail className="col-md-12 picked-recipe" recipe={recipes[recipes.length - 1]}/>}
-            </div>
+            <SearchPage />
           </div>
         </div>
       );
@@ -51,14 +42,13 @@ class HomePage extends React.Component {
     
       return (
         <div className="container">
-          <div className="row">
-            <div className="col-md-2"></div>
-            <div className="row">
-              <h4 className="intro"> Don't feel like thinking about what to cook for today? </h4>
-              <h4 className="intro"> Just click the button below and Qoo will choose a recipe for you!</h4>
-            </div>
+          <div className="row intro">
+              <h4> Don't feel like thinking about what to cook for today? </h4>
+              <h4> Search with any ingredient you have in your fridge!</h4>
+              <h4> Or just click the random button and Qoo will choose a recipe for you!</h4>
           </div>
           {this.renderRecipe(recipes)}
+
         </div>
       );
     

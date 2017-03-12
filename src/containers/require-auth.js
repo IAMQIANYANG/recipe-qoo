@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import toastr from 'toastr'
+
+toastr.options = {
+  "positionClass": "toast-top-full-width"
+};
+
 
 export default function(ComposedComponent) {
   class Authentication extends Component {
@@ -20,6 +26,7 @@ export default function(ComposedComponent) {
     }
 
     render() {
+      toastr.error("Please login or signup to proceed!")
       return <ComposedComponent {...this.props} />
     }
 

@@ -87,7 +87,21 @@ export function deleteRecipe(recipe) {
   }
 }
 
+export function searchExternalRecipes(query) {
+  return function(dispatch) {
+    return fetch(`https://community-food2fork.p.mashape.com/search?key=ccc216e945217f60c023df9a10b89fd8&q=${query}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-Mashape-Key': '358RD5CHPYmshmPNKm6B8wLiJn4xp1yWWtajsnRhD9cb8yOCIx'
+      }
 
+      }).then(externalRecipes => externalRecipes.json())
+        .then(externalRecipes => dispatch({type: types.LOAD_SEARCH_EXTERNAL_RECIPES_SUCCESS, externalRecipes}))
+        .catch(error => console.log(error));
+  }
+}
 
 
 
