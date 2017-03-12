@@ -39,7 +39,6 @@ class ManageRecipePage extends React.Component {
     if (!this.state.localRecipe.name || this.state.localRecipe.ingredients.length < 1 || !this.state.localRecipe.image || this.state.localRecipe.directions.length < 1) {
       toastr.error("All information is required except tags")
     } else {
-      console.log(this.state.localRecipe.tags)
       let ingredients = this.state.localRecipe.ingredients;
       ingredients = ingredients.split("\n");
       let directions = this.state.localRecipe.directions;

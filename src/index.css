@@ -191,3 +191,10 @@ a.hover {
   font-size: 1.3em;
   margin: 10px;
 }
+
+
+@media screen and (min-width: 1000px) {
+  .thumbnail  {
+    height:280px;
+  }
+}
