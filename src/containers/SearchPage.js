@@ -66,7 +66,7 @@ class SearchPage extends React.Component {
   }
   
   render() {
-    const searchTags = ["chicken", "toufu", "beef", "fish", "pork" ];
+    const searchTags = ["pork", "chicken", "toufu", "beef", "fish"];
     return (
       <div>
         <div className="col-md-6 col-md-offset-4">
