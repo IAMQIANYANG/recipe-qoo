@@ -55,7 +55,8 @@ class SearchPage extends React.Component {
 
   onTagClick(evt) {
     this.setState({searchQuery: evt.target.value});
-    this.onSearchSubmit();
+    this.setState({searched: true});
+    this.findByIngredient(evt.target.value)
   }
 
   onRandom(){
