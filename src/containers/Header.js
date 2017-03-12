@@ -17,7 +17,7 @@ class Header extends Component {
           <ul className="nav navbar-nav">
             <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
             <li><Link to="/recipes"> Recipes </Link></li>
-            {this.props.isAuthenticated && <li><Link to="/recipes/new"> Add New </Link></li>}
+            <li><Link to="/recipes/new"> Create Recipe </Link></li>
             <li><Link to="/about"> About </Link></li>
           </ul>
           <ul className="nav navbar-nav navbar-right">

@@ -6,7 +6,7 @@ body {
 }
 
 a {
-  color: #4A4E4D;
+  color: #42729B;
 }
 .container-fluid {
   padding: 0;
@@ -98,21 +98,25 @@ a.hover {
 }
 
 /* home page*/
-.picked-recipe {
-  height: 70vh;
-}
 
 .intro {
-  margin:20px;
+  margin-top:100px;
   text-align: center;
+}
+
+.searchBox {
+  height: 50px;
+  width: 250px;
+  margin-top: 60px;
 }
 
 .pick-button {
   border:none;
   background: #F8D9D5;
-  margin:10px 20px;
+  margin:10px 5px;
   height: 50px;
   font-size: 1.2em;
+  padding: 0 15px;
 }
 
 .pick-button:hover{
@@ -125,6 +129,13 @@ a.hover {
 
 .pick-button:focus {
   outline:0;
+}
+
+.searchTag {
+  margin:10px;
+  padding:3px 10px;
+  border:none;
+  background: #F4EDF6;
 }
 
 .caption h3 {
@@ -156,7 +167,10 @@ a.hover {
   text-align: center;
   font-size: 1.3em;
   color: #42729B;
+}
 
+.signup:visited {
+  color: #42729B;
 }
 
 .toast-top-full-width {
@@ -170,7 +184,7 @@ a.hover {
 
 .about {
   height: 80vh;
-  background: #EDF9FF;
+  background: #fff;
 }
 
 .about-intro {
